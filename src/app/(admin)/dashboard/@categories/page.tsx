@@ -5,8 +5,18 @@ import DashboardCard from '@/app/components/dashboard-card';
 
 export interface PageProps {}
 
+interface CategoriesData {
+  categoryId: number;
+  categoryTitle: string;
+  count: number;
+}
+
 export default async function Page({}: PageProps) {
-  const data = await getSummaryCategories();
+  const data: CategoriesData[] = await new Promise((res) => {
+    setTimeout(() => {
+      res(getSummaryCategories());
+    }, 2000);
+  });
 
   return (
     <DashboardCard label="Categories of companies">

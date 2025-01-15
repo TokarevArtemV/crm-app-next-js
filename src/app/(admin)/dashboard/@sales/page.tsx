@@ -7,8 +7,19 @@ import DashboardCard from '@/app/components/dashboard-card';
 
 export interface PageProps {}
 
+interface CompanyData {
+  companyId: number;
+  companyTitle: string;
+  sold: number;
+  income: number;
+}
+
 export default async function Page({}: PageProps) {
-  const data = await getSummarySales();
+  const data: CompanyData[] = await new Promise((res) => {
+    setTimeout(() => {
+      res(getSummarySales());
+    }, 1000);
+  });
 
   return (
     <DashboardCard label="Sales details">

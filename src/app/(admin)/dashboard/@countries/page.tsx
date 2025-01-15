@@ -6,8 +6,18 @@ import DashboardCard from '@/app/components/dashboard-card';
 
 export interface PageProps {}
 
+interface CountryData {
+  countryId: number;
+  countryTitle: string;
+  count: number;
+}
+
 export default async function Page({}: PageProps) {
-  const data = await getSummaryCountries();
+  const data: CountryData[] = await new Promise((res) => {
+    setTimeout(() => {
+      res(getSummaryCountries());
+    }, 4000);
+  });
 
   return (
     <DashboardCard label="Countries of companies">
